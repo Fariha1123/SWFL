@@ -255,8 +255,9 @@ contract Stake is Owned {
             // distribute the staking fee accumulated before updating the user's stake
             _addPayout(_stakingFee);
             
-        // CLAIM REWARD, if existing stake
-        CLAIMREWARD();
+        // add pending rewards to remainder to be claimed by user later, if there is any existing stake
+        uint256 owing = pendingReward(msg.sender);
+        stakers[msg.sender].remainder += owing;
         
         stakers[msg.sender].stakedTokens = (tokens.sub(_stakingFee)).add(stakers[msg.sender].stakedTokens);
         stakers[msg.sender].lastDividends = 0;
@@ -341,8 +342,9 @@ contract Stake is Owned {
         
         uint256 _unstakingFee = (onePercent(tokens).mul(unstakingFee)).div(10);
         
-        // CLAIM REWARD, if existing stake
-        CLAIMREWARD();
+        // add pending rewards to remainder to be claimed by user later, if there is any existing stake
+        uint256 owing = pendingReward(msg.sender);
+        stakers[msg.sender].remainder += owing;
                 
         require(IERC20(SWFL).transfer(msg.sender, tokens.sub(_unstakingFee)), "Error in un-staking tokens");
         
