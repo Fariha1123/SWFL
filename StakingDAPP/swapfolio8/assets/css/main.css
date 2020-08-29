@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@500&display=swap');
+
+body {
+    background: #232F3F;
+}
+
+.main-section {
+    height: 100vh;
+}
+
+.main-navbar {
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.nav-right-side {
+    background: #3E4856;
+    padding-top: 2px;
+    padding-bottom: 7px;
+    border-radius: 7px;
+    /* height: 49px; */
+    width: 100%;
+}
+
+button.btn.login-top-btn {
+    height: 27px;
+    background: #00DCBA;
+    margin-top: 5px;
+    color: black;
+    font-weight: 500;
+    font-size: 13px;
+    padding-bottom: 23px;
+    margin-top: 6px;
+    letter-spacing: 1px;
+}
+
+.ethereum-solde {
+    margin-top: 7px;
+    background: rgba(22, 31, 42, 0.76);
+    height: 31px;
+    color: gray;
+    border-radius: 4px;
+    text-align: center;
+    padding-top: 4px;
+}
+
+.card {
+    background: #1E2936;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.card-height {
+    min-height: 400px;
+}
+
+.right-card-header-paragraph {
+    color: rgba(0, 223, 190, 0.53);
+    letter-spacing: 1px;
+    font-family: rubik, sans-serif;
+    font-size: 14px;
+    text-align: right;
+}
+
+hr {
+    background-color: gray;
+    margin-top: -10px;
+}
+
+.main-number {
+    text-align-last: center;
+    color: white;
+    font-family: "Fira Mono";
+    min-height: 65px;
+}
+
+.main-number-small {
+    text-align: center;
+    color: white;
+    font-family: "Fira Mono";
+    font-weight: 100;
+    min-height: 30px;
+}
+
+.main-number {
+    font-size: 42px;
+}
+
+.main-number-small {
+    font-size: 20px;
+}
+
+.sub-number {
+    color: white;
+    text-align: center;
+    font-family: Fira Mono;
+    font-size: 14px;
+    font-weight: 300;
+    margin-top: -20px;
+    min-height: 22px;
+}
+
+.sub-paragraph {
+    color: white;
+    text-align: center;
+    font-family: Fira Mono;
+}
+
+.form-control {
+    border: 2px solid #00DFBE;
+    border-radius: 0;
+    height: 46px;
+    background: none;
+}
+
+button.btn.btn-stake {
+    background: #00DFBE;
+    width: 100%;
+    /* margin-left: -31px; */
+    /* margin-top: 6px; */
+    border-radius: 0;
+    height: 46px;
+    letter-spacing: 2px;
+}
+
+.btn-stake:focus, button.btn.btn-stake-danger.danger-colors {
+    box-shadow: 0 0 0 0;
+}
+
+.danger-colors {
+    color: #FFADA2;
+    border: 2px solid #FFADA2;
+}
+
+.btn-stake-danger {
+    background: #FFADA2;
+    width: 100%;
+    /* margin-left: -31px; */
+    /* margin-top: 6px; */
+    border-radius: 0;
+    height: 46px;
+    letter-spacing: 2px;
+    color: #642B29;
+}
+
+.claim-btn {
+    letter-spacing: 1px;
+}
+
+.btn.claim-btn {
+    background: rgb(22, 31, 42);
+    height: 5px;
+    font-size: 13px;
+    padding-bottom: 27px;
+    color: #00dcba;
+}
+
+i.fas.fa-hand-holding-heart {
+    color: #00dfbe;
+    font-size: 24px;
+    border: 3px solid;
+    padding: 11px;
+    border-radius: 58px;
+}
+
+i.fas.fa-cut {
+    color: #FFADA2;
+    font-size: 24px;
+    border: 3px solid;
+    padding: 11px;
+    border-radius: 58px;
+}
+
+.paragraph-bottom {
+    padding-left: 19px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+input {
+    color: white;
+}
+
+#login_message, #swfl_message, #stack_message, #stack_message_danger, #withdraw_message, #withdraw_message_danger, #spinner, #btn-stake2, #stake-message, #spinner-withdraw,
+#btn-withdraw2, #withdraw-message, #approving {
+    display: none;
+}
+
+#spinner, #spinner-withdraw {
+    height: 20px;
+    width: 20px;
+    text-align-last: center;
+}
+
+.approve-btn {
+    background: #00DCBA;
+    width: 50%;
+}
+
+#approve, #approving {
+    font-family: Fira Mono;
+    margin-top: 18px;
+}
+
+#withdraw-value {
+    /* margin-bottom: 19px; */
+}
+
+.btn-block {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.bg-dark {
+    background: #1E2936 !important;
+}
+
+@media screen and (max-width: 768px) {
+    .ethereum-solde {
+        margin-top: 10px;
+        background: rgba(22, 31, 42, 0.76);
+        height: 31px;
+        color: gray;
+        border-radius: 4px;
+        text-align: center;
+        padding-top: 4px;
+        /* margin-left: -16px; */
+    }
+
+    #btn-withdraw1 {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #second-swfl-value {
+        text-align-last: left !important;
+    }
+
+    .main-section {
+        height: fit-content;
+    }
+}

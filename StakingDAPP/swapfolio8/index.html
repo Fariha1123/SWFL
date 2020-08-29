@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Swapfolio</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/all.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+    </head>
+
+    <body>
+
+        <div class="container-fluid main-section">
+            <div class="container">
+                <div class="main-navbar">
+                    <div class="row m-0">
+                        <div class="col-md-4 col-lg-6 col-xl-7 text-center mb-3 text-md-left mb-md-0">
+                            <a href="/">
+                                <img class="logo" src="assets/images/logo.svg" alt="Swapfolio Logo">
+                            </a>
+                        </div>
+                        <div class="col-md-8 col-lg-6 col-xl-5 nav-right-side">
+                            <div class="row">
+                                <div class="col-md-7 pr-md-0">
+                                    <button class="btn login-top-btn btn-block"><i class="fa fa-link"></i> LOGIN WITH METAMASK</button>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="ethereum-solde">
+                                        <i class="fab fa-ethereum float-left mt-1 ml-2"></i>
+                                        <span id="metamaskAddress"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger" id="stack_message_danger">
+                    Value must be more than 0 .
+                </div>
+                <div class="alert alert-success" id="withdraw_message">
+                    Value is <span id="withdraw_value"></span> .
+                </div>
+                <div class="alert alert-danger" id="withdraw_message_danger">
+                    Value must be more than 0 .
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <p class="right-card-header-paragraph">TOTAL STAKED SWFL</p>
+                            <hr>
+                            <p class="main-number" id="totalStakes"></p>
+                            <p class="sub-number"><span id="circulatingSupply"></span> %</p>
+                            <p class="sub-paragraph">of circulating supply</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <p class="right-card-header-paragraph">YOUR STAKED SWFL</p>
+                            <hr>
+                            <p class="main-number" id="yourStakes"></p>
+                            <p class="sub-number"><span id="yourStakePercent"></span> %</p>
+                            <p class="sub-paragraph">of staked SWFL</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-height">
+                            <p class="right-card-header-paragraph">UNSTAKED SWFL BALANCE</p>
+                            <hr>
+                            <p class="main-number-small"><span id="SWFLBalance"></span> SWFL</p>
+                            <div id="stake-main-section">
+                                <p class="right-card-header-paragraph">AMOUNT TO STAKE</p>
+                                <form method="post" action="#" id="stackForm" class="row">
+                                    <div class="col-lg-8 pr-lg-0">
+                                        <input class="form-control" id="stack-value" type="number" min="1" placeholder="SWFL To Stake">
+                                        <label class="text-danger" id="validation-error"></label>
+                                        <label class="text-success" id="stake-message"><i class="fa fa-check"></i> Staking request submitted, will be confirmed shortly</label>
+                                    </div>
+                                    <div class="col-lg-4 pl-lg-0">
+                                        <button class="btn btn-stake" disabled id="btnStake">
+                                            <span class="before-click"><i class="fa fa-lock"></i> STAKE</span>
+                                            <span class="after-click d-none"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> STAKE</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="approval-section" class="d-none">
+                                <div class="text-center">
+                                    <button class="btn approve-btn" type="button" id="approveBtn">
+                                        <span class="before-click"><i class="fa fa-check"></i> APPROVE</span>
+                                        <span class="after-click d-none"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> APPROVE</span>
+                                    </button>
+                                </div>
+                                <p class="text-align mt-4 mb-3" style="color:#00DFBE;font-family: rubik, sans-serif;">Before staking, approve the staking contract to move the tokens from your wallet</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card card-height">
+                            <p class="right-card-header-paragraph">YOUR SWFL REWARD</p>
+                            <hr>
+                            <div class="row text-center text-sm-right mb-1">
+                                <div class="col-sm-7">
+                                    <p class="main-number-small text-sm-right"><span id="pendingReward"></span> SWFL</p>
+                                </div>
+                                <div class="col-sm-5">
+                                    <button class="btn claim-btn" onclick="claimReward()"><i class="fas fa-plus-circle"></i> CLAIM SWFL</button>
+                                </div>
+                            </div>
+                            <p class="right-card-header-paragraph">AMOUNT TO WITHDRAW</p>
+                            <form method="post" action="#" id="withdrawForm" class="row">
+                                <div class="col-lg-8 pr-lg-0">
+                                    <input class="form-control danger-colors" type="number" min="1" id="withdrawValue" placeholder="SWFL To Unstake">
+                                    <label class="text-danger" id="withdraw_value_error"></label>
+                                </div>
+                                <div class="col-lg-4 pl-lg-0">
+                                    <button class="btn btn-stake-danger danger-colors" disabled id="btnWithdraw">
+                                        <span class="before-click"><i class="fa fa-lock-open"></i> WITHDRAW</span>
+                                        <span class="after-click d-none"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> WITHDRAW</span>
+                                    </button>
+                                </div>
+                            </form>
+                            <div id="withdraw-message" class="text-success"><i class="fa fa-check"></i> Withdraw request submitted successfully, will be confirmed shortly</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4" style="color:#00dfbe;">
+                        <i class="fas fa-hand-holding-heart"></i> <span class="paragraph-bottom">DEPOSIT & STAKE YOUR SWFL WITH 2.5% FEE</span>
+                    </div>
+                    <div class="col-md-6 mb-4" style="color:#FFADA2;">
+                        <i class="fas fa-cut"></i> <span class="paragraph-bottom">WITHDRAW ANY TIME FOR A 2.5% UNSTAKING FEE</span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+        <div class="modal fade" id="successModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content bg-dark">
+                    <div class="modal-body text-center">
+                        <p class="mt-3 mb-0 text-white">Transaction submitted successfully.</p>
+                    </div>]
+                </div>
+            </div>
+        </div>
+
+
+
+        <script src="assets/js/jquery-3.4.1.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/script.js"></script>
+        <script src="assets/js/web3.min.js"></script>
+    </body>
+
+</html>

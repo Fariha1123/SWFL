@@ -1,0 +1,16 @@
+{
+    "name": "swfl",
+    "version": "1.0.0",
+    "description": "the swfl vesting contract ",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --exit --recursive test"
+    },
+    "author": "https://www.fiverr.com/users/farihaabbasi",
+    "license": "ISC",
+    "devDependencies": {
+        "@openzeppelin/test-environment": "^0.1.4",
+        "chai": "^4.2.0",
+        "mocha": "^8.1.1"
+    }
+}
