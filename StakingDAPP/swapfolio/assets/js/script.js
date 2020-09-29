@@ -1,10 +1,273 @@
-var STAKINGCONTRACT_ADDRESS = "0xCAF234Ae8112D30d8B20712895937D23787C052D";
-var STAKINGCONTRACT_ABI = [{ "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "staker", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "reward", "type": "uint256" }], "name": "CLAIMEDREWARD", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "_from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "_to", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "uint256", "name": "round", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "tokens", "type": "uint256" }, { "indexed": false, "internalType": "address", "name": "sender", "type": "address" }], "name": "PAYOUT", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "staker", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "tokens", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "stakingFee", "type": "uint256" }], "name": "STAKED", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": false, "internalType": "address", "name": "staker", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "tokens", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "unstakingFee", "type": "uint256" }], "name": "UNSTAKED", "type": "event" }, { "inputs": [{ "internalType": "uint256", "name": "tokens", "type": "uint256" }], "name": "ADDFUNDS", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "CLAIMREWARD", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokens", "type": "uint256" }], "name": "STAKE", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "SWFL", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "tokens", "type": "uint256" }], "name": "WITHDRAW", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "staker", "type": "address" }], "name": "getPendingReward", "outputs": [{ "internalType": "uint256", "name": "_pendingReward", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address payable", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "name": "payouts", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "round", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalDividends", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalStakes", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address payable", "name": "_newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "user", "type": "address" }], "name": "yourSWFLBalance", "outputs": [{ "internalType": "uint256", "name": "SWFLBalance", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "staker", "type": "address" }], "name": "yourStakedSWFL", "outputs": [{ "internalType": "uint256", "name": "stakedSWFL", "type": "uint256" }], "stateMutability": "view", "type": "function" }];
+var STAKINGCONTRACT_ADDRESS = "0xa4Bed6c57B2cfd80460459B9A50D5509877E007E"; //"0xCAF234Ae8112D30d8B20712895937D23787C052D";
+var STAKINGCONTRACT_ABI = [{
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "internalType": "address", "name": "staker", "type": "address" }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "reward",
+        "type": "uint256"
+    }],
+    "name": "CLAIMEDREWARD",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{ "indexed": true, "internalType": "address", "name": "_from", "type": "address" }, {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_to",
+        "type": "address"
+    }],
+    "name": "OwnershipTransferred",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "internalType": "uint256", "name": "round", "type": "uint256" }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokens",
+        "type": "uint256"
+    }, { "indexed": false, "internalType": "address", "name": "sender", "type": "address" }],
+    "name": "PAYOUT",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "internalType": "address", "name": "staker", "type": "address" }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokens",
+        "type": "uint256"
+    }, { "indexed": false, "internalType": "uint256", "name": "stakingFee", "type": "uint256" }],
+    "name": "STAKED",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{ "indexed": false, "internalType": "address", "name": "staker", "type": "address" }, {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokens",
+        "type": "uint256"
+    }, { "indexed": false, "internalType": "uint256", "name": "unstakingFee", "type": "uint256" }],
+    "name": "UNSTAKED",
+    "type": "event"
+}, {
+    "inputs": [{ "internalType": "uint256", "name": "tokens", "type": "uint256" }],
+    "name": "ADDFUNDS",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "CLAIMREWARD",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "uint256", "name": "tokens", "type": "uint256" }],
+    "name": "STAKE",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "SWFL",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "uint256", "name": "tokens", "type": "uint256" }],
+    "name": "WITHDRAW",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "address", "name": "staker", "type": "address" }],
+    "name": "getPendingReward",
+    "outputs": [{ "internalType": "uint256", "name": "_pendingReward", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address payable", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "payouts",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "round",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "totalDividends",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [],
+    "name": "totalStakes",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "address payable", "name": "_newOwner", "type": "address" }],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "address", "name": "user", "type": "address" }],
+    "name": "yourSWFLBalance",
+    "outputs": [{ "internalType": "uint256", "name": "SWFLBalance", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{ "internalType": "address", "name": "staker", "type": "address" }],
+    "name": "yourStakedSWFL",
+    "outputs": [{ "internalType": "uint256", "name": "stakedSWFL", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+}];
 var SWFLCONTRACT_ADDRESS = "0xBa21Ef4c9f433Ede00badEFcC2754B8E74bd538A";
-var SWFLCONTRACT_ABI = [{ "constant": true, "inputs": [], "name": "name", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "spender", "type": "address" }, { "name": "value", "type": "uint256" }], "name": "approve", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "sender", "type": "address" }, { "name": "recipient", "type": "address" }, { "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [{ "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "spender", "type": "address" }, { "name": "addedValue", "type": "uint256" }], "name": "increaseAllowance", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "value", "type": "uint256" }], "name": "burn", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [{ "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "name": "spender", "type": "address" }, { "name": "subtractedValue", "type": "uint256" }], "name": "decreaseAllowance", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "name": "recipient", "type": "address" }, { "name": "amount", "type": "uint256" }], "name": "transfer", "outputs": [{ "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "name": "owner", "type": "address" }, { "name": "spender", "type": "address" }], "name": "allowance", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [{ "name": "name", "type": "string" }, { "name": "symbol", "type": "string" }, { "name": "decimals", "type": "uint8" }, { "name": "totalSupply", "type": "uint256" }, { "name": "feeReceiver", "type": "address" }, { "name": "tokenOwnerAddress", "type": "address" }], "payable": true, "stateMutability": "payable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "from", "type": "address" }, { "indexed": true, "name": "to", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "name": "owner", "type": "address" }, { "indexed": true, "name": "spender", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" }], "name": "Approval", "type": "event" }];
+var SWFLCONTRACT_ABI = [{
+    "constant": true,
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "name": "", "type": "string" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{ "name": "spender", "type": "address" }, { "name": "value", "type": "uint256" }],
+    "name": "approve",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "totalSupply",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{ "name": "sender", "type": "address" }, { "name": "recipient", "type": "address" }, {
+        "name": "amount",
+        "type": "uint256"
+    }],
+    "name": "transferFrom",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [{ "name": "", "type": "uint8" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{ "name": "spender", "type": "address" }, { "name": "addedValue", "type": "uint256" }],
+    "name": "increaseAllowance",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{ "name": "value", "type": "uint256" }],
+    "name": "burn",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{ "name": "account", "type": "address" }],
+    "name": "balanceOf",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [{ "name": "", "type": "string" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{ "name": "spender", "type": "address" }, { "name": "subtractedValue", "type": "uint256" }],
+    "name": "decreaseAllowance",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": false,
+    "inputs": [{ "name": "recipient", "type": "address" }, { "name": "amount", "type": "uint256" }],
+    "name": "transfer",
+    "outputs": [{ "name": "", "type": "bool" }],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+}, {
+    "constant": true,
+    "inputs": [{ "name": "owner", "type": "address" }, { "name": "spender", "type": "address" }],
+    "name": "allowance",
+    "outputs": [{ "name": "", "type": "uint256" }],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+}, {
+    "inputs": [{ "name": "name", "type": "string" }, { "name": "symbol", "type": "string" }, {
+        "name": "decimals",
+        "type": "uint8"
+    }, { "name": "totalSupply", "type": "uint256" }, {
+        "name": "feeReceiver",
+        "type": "address"
+    }, { "name": "tokenOwnerAddress", "type": "address" }],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "constructor"
+}, {
+    "anonymous": false,
+    "inputs": [{ "indexed": true, "name": "from", "type": "address" }, {
+        "indexed": true,
+        "name": "to",
+        "type": "address"
+    }, { "indexed": false, "name": "value", "type": "uint256" }],
+    "name": "Transfer",
+    "type": "event"
+}, {
+    "anonymous": false,
+    "inputs": [{ "indexed": true, "name": "owner", "type": "address" }, {
+        "indexed": true,
+        "name": "spender",
+        "type": "address"
+    }, { "indexed": false, "name": "value", "type": "uint256" }],
+    "name": "Approval",
+    "type": "event"
+}];
 
 var accounts, STAKINGCONTRACT, SWFLCONTRACT, allowances = 0,
-    SWFLBalance = 0;
+    SWFLBalance = 0,
+    STAKEDTokens = 0;
 
 async function metamaskIntegration() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {} else {
@@ -91,8 +354,8 @@ function claimReward() {
 
 async function getNetwork() {
     var net = await web3.eth.net.getNetworkType();
-    if (net != "main") {
-        $('#metamaskAddress').html('Switch to Main');
+    if (net != "ropsten") {
+        $('#metamaskAddress').html('Switch to Ropsten');
     } else {
         $('#metamaskAddress').html(accounts[0].substring(0, 6) + '...' + accounts[0].substring(36, 42));
     }
@@ -100,17 +363,28 @@ async function getNetwork() {
 
 $(function() {
 
+    $('#rewardPercentage').html('Reward Percentage 2.5');
+
     // STACK INPUT
     $('#stack-value').keyup(function(event) {
         $('#stake-message').css({ 'display': 'none' });
         $('#stakeTransactionLink').css({ 'display': 'none' });
+
+        // let t = $(this).val();
+        // $(this).val((t.indexOf(".") >= 0) ? (t.substr(0, t.indexOf(".")) + t.substr(t.indexOf("."), 3)) : t);
 
         var value = $(this).val();
         value = (convert(value * 10 ** 18)).toString();
 
         console.log(value);
 
-        if (value > allowances) {
+        if ($(this).val() > 0) {
+            $('#btnStake').removeAttr('disabled');
+        } else {
+            $('#btnStake').attr('disabled', '');
+        }
+
+        /*if (value > allowances) {
             $('#approval-section').removeClass('d-none');
             $('#btnStake').attr('disabled', '');
         } else {
@@ -120,7 +394,7 @@ $(function() {
             } else {
                 $('#btnStake').attr('disabled', '');
             }
-        }
+        }*/
     });
 
     // APPROVE BTN
@@ -140,6 +414,7 @@ $(function() {
             $('#approveBtn').removeAttr('disabled');
             $('#approveBtn').find('.after-click').addClass('d-none');
             $('#approveBtn').find('.before-click').removeClass('d-none');
+            $('#approveModal').modal('hide');
             $('#successModal').modal('show');
 
             setTimeout(function() {
@@ -152,6 +427,11 @@ $(function() {
     });
 
     // STACK BTN
+    $('#btnStackAll').click(function(event) {
+        event.preventDefault();
+        $('#stack-value').val(SWFLBalance / 10 ** (18));
+        $('#btnStake').removeAttr('disabled');
+    });
     $('#btnStake').click(function(event) {
         event.preventDefault();
         $('#btnStake').attr('disabled', '');
@@ -162,23 +442,32 @@ $(function() {
 
         value = (convert(value * 10 ** 18)).toString();
 
-        STAKINGCONTRACT.methods.STAKE(value).send({
-            from: accounts[0],
-            gasLimit: 300000,
-            gasPrice: 21000000000 //21 Gwei
-        }).on('transactionHash', function(hash) {
+        if (value > allowances) {
+            // SHOW APPROVE MODAL
+            $('#approveModal').modal('show');
 
             $('#btnStake').removeAttr('disabled');
             $('#btnStake').find('.after-click').addClass('d-none');
             $('#btnStake').find('.before-click').removeClass('d-none');
+        } else {
+            STAKINGCONTRACT.methods.STAKE(value).send({
+                from: accounts[0],
+                gasLimit: 300000,
+                gasPrice: 21000000000 //21 Gwei
+            }).on('transactionHash', function(hash) {
 
-            $('#stake-message').css({ 'display': 'block' });
-            $('#stakeTransactionLink').css({ 'display': 'block' }); // show stake transaction link
-            $('#stakeTransactionLink').attr("href", 'https://ropsten.etherscan.io/tx/' + hash); // update transaction link
+                $('#btnStake').removeAttr('disabled');
+                $('#btnStake').find('.after-click').addClass('d-none');
+                $('#btnStake').find('.before-click').removeClass('d-none');
 
-        }).on('confirmation', function(confirmationNumber, receipt) {
+                $('#stake-message').css({ 'display': 'block' });
+                $('#stakeTransactionLink').css({ 'display': 'block' }); // show stake transaction link
+                $('#stakeTransactionLink').attr("href", 'https://ropsten.etherscan.io/tx/' + hash); // update transaction link
 
-        });
+            }).on('confirmation', function(confirmationNumber, receipt) {
+
+            });
+        }
     });
 
 
@@ -250,6 +539,12 @@ $(function() {
         }
     });
 
+    $('#btnUnstackAll').click(function(event) {
+        event.preventDefault();
+        console.log(STAKEDTokens);
+        $('#withdrawValue').val(STAKEDTokens);
+        $('#btnWithdraw').removeAttr('disabled');
+    });
     $('#btnWithdraw').click(function(event) {
         event.preventDefault();
 
@@ -277,40 +572,81 @@ $(function() {
     });
 
 
-
     metamaskIntegration().then(x => {
 
         getNetwork();
 
         contractInitialization(STAKINGCONTRACT_ADDRESS, STAKINGCONTRACT_ABI).then(C => {
             STAKINGCONTRACT = C;
-            STAKINGCONTRACT.methods.getPendingReward(accounts[0]).call().then(reward => $('#pendingReward').html((reward / 10 ** (18)).toFixed(4)));
+            STAKINGCONTRACT.methods.getPendingReward(accounts[0]).call().then(reward => $('#pendingReward').html(numberWithCommas((reward / 10 ** (18)).toFixed(4))));
 
             contractInitialization(SWFLCONTRACT_ADDRESS, SWFLCONTRACT_ABI).then(C => {
                 SWFLCONTRACT = C;
 
                 SWFLCONTRACT.methods.balanceOf(accounts[0]).call().then(balance => {
-                    $('#SWFLBalance').html((balance / 10 ** (18)).toFixed(4));
+                    $('#SWFLBalance').html(numberWithCommas((balance / 10 ** (18)).toFixed(4)));
                     SWFLBalance = balance;
                 });
 
                 STAKINGCONTRACT.methods.yourStakedSWFL(accounts[0]).call().then(stakes => {
-                    $('#yourStakes').html((stakes / 10 ** (18)).toFixed(4));
-
+                    $('#yourStakes').html(numberWithCommas((stakes / 10 ** (18)).toFixed(4)));
+                    STAKEDTokens = stakes / 10 ** (18);
                     STAKINGCONTRACT.methods.totalStakes().call().then(ts => {
-                        $('#totalStakes').html((ts / 10 ** (18)).toFixed(2)); // TOTAL STAKED
+                        $('#totalStakes').html(numberWithCommas((ts / 10 ** (18)).toFixed(2))); // TOTAL STAKED
                         var stakingPercentage = (stakes / ts * 100).toFixed(6);
                         console.log(stakingPercentage);
                         if (ts == 0)
                             stakingPercentage = (0).toFixed(6);
-                        $('#yourStakePercent').html(stakingPercentage);
+                        $('#yourStakePercent').html(numberWithCommas(stakingPercentage));
 
                         //SWFLCONTRACT.methods.totalSupply().call().then(tsupp => {
                         var tsupp = 18900000 * 10 ** (18);
                         var percentage = (ts / tsupp * 100).toFixed(6);
                         if (percentage == NaN)
                             percentage = 0;
-                        $('#circulatingSupply').html(percentage);
+                        $('#circulatingSupply').html(numberWithCommas(percentage));
+                        //});
+
+                        SWFLCONTRACT.methods.allowance(accounts[0], STAKINGCONTRACT_ADDRESS).call().then(_allowances => allowances = (convert(parseInt(_allowances))).toString());
+                    });
+
+                });
+
+            });
+        });
+
+    });
+
+    setInterval(function() {
+        contractInitialization(STAKINGCONTRACT_ADDRESS, STAKINGCONTRACT_ABI).then(C => {
+            STAKINGCONTRACT = C;
+            STAKINGCONTRACT.methods.getPendingReward(accounts[0]).call().then(reward => $('#pendingReward').html(numberWithCommas((reward / 10 ** (18)).toFixed(4))));
+
+            contractInitialization(SWFLCONTRACT_ADDRESS, SWFLCONTRACT_ABI).then(C => {
+                SWFLCONTRACT = C;
+
+                SWFLCONTRACT.methods.balanceOf(accounts[0]).call().then(balance => {
+                    $('#SWFLBalance').html(numberWithCommas((balance / 10 ** (18)).toFixed(4)));
+                    SWFLBalance = balance;
+                });
+
+                STAKINGCONTRACT.methods.yourStakedSWFL(accounts[0]).call().then(stakes => {
+                    $('#yourStakes').html(numberWithCommas((stakes / 10 ** (18)).toFixed(4)));
+
+                    STAKINGCONTRACT.methods.totalStakes().call().then(ts => {
+                        $('#totalStakes').html(numberWithCommas((ts / 10 ** (18)).toFixed(2))); // TOTAL STAKED
+                        var stakingPercentage = (stakes / ts * 100).toFixed(6);
+                        console.log(stakingPercentage);
+                        if (ts == 0)
+                            stakingPercentage = (0).toFixed(6);
+                        $('#yourStakePercent').html(numberWithCommas(stakingPercentage));
+
+                        //SWFLCONTRACT.methods.totalSupply().call().then(tsupp => {
+                        var tsupp = 18900000 * 10 ** (18);
+                        var percentage = (ts / tsupp * 100).toFixed(6);
+                        if (percentage == NaN)
+                            percentage = 0;
+                        $('#circulatingSupply').html(numberWithCommas(percentage));
                         //});
 
                         SWFLCONTRACT.methods.allowance(accounts[0], STAKINGCONTRACT_ADDRESS).call().then(_allowances => allowances = parseInt(_allowances));
@@ -320,6 +656,10 @@ $(function() {
 
             });
         });
-
-    });
+    }, 20000);
 });
+
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+}
